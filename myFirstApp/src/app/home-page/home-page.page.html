@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pokedéx for Fabrica Info</ion-title>
+    <ion-icon (click)="openFavorite()" slot="end" size="large" name="star-half-outline"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let pokemon of pokemons;">
+    <ion-item [routerLink]="pokemon.pokemonIndex">
+      <ion-avatar slot="start">
+        <img [src]="pokemon.image" style="background: #F2F2F2;">
+      </ion-avatar>
+      <ion-label
+      color="success"
+      class="ion-text-capitalize">
+        <h2>{{ pokemon.name }}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-button
+    expand="full"
+    (click)="addToFavorite(pokemon)">
+      <ion-icon
+       name="star-outline"
+       ></ion-icon>
+      {{'Adicionar aos Favoritos  '}}
+      <ion-icon
+       name="star-outline"
+       ></ion-icon>
+      </ion-button>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="allPokemons(true, $event)">
+    <ion-infinite-scroll-content loadingSpinner="spinner" loadingText="Carregando mais Pokemons...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
